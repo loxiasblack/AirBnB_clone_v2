@@ -20,7 +20,7 @@ class DBStorage:
         """"""
         db_user = os.getenv("HBNB_MYSQL_USER")
         db_password = os.getenv("HBNB_MYSQL_PWD")
-        db_host = os.getenv("HBNB_MYSQL_HOST")
+        db_host = os.getenv("HBNB_MYSQL_HOST", default="localhost")
         db_name = os.getenv("HBNB_MYSQL_DB")
 
         
