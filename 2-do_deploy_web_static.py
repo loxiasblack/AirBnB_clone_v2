@@ -20,15 +20,16 @@ def do_deploy(archive_path):
         folder_name = archive_filename.split('.')[0]
         target_dir = f"/data/web_static/releases/{folder_name}"
 
-        run(f"mkdir -p {target_dir}")
-        run(f"tar -xzf /tmp/{archive_filename} -C {target_dir}")
-        run(f"rm /tmp/{archive_filename}")
+        run(f"sudo mkdir -p {target_dir}")
+        run(f"sudo tar -xzf /tmp/{archive_filename} -C {target_dir}")
+        run(f"sudo rm -rf /tmp/{archive_path}")
 
-        run(f"rm -f /data/web_static/current")
-        run(f"ln -s {target_dir}/ /data/web_static/current")
+        run(f"sudo rm -rf /data/web_static/current")
+        run(f"sudo ln -s {target_dir}/web_static/ /data/web_static/current")
+        print("it's Done")
         return True
     except Exception:
         return False
 
 
-archiv_path = "./versions/web_static_20240201013448.tgz"
+archive_path = "./versions/web_static_20240201013448.tgz"
