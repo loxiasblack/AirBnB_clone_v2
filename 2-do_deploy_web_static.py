@@ -32,4 +32,4 @@ def do_deploy(archive_path):
         return False
 
 
-archive_path = "./versions/web_static_20240201013448.tgz"
+archive_path = "./versions/web_static_20240201013449.tgz"
