@@ -6,6 +6,7 @@ from fabric.api import local
 import os
 from datetime import datetime
 
+
 @task
 def do_pack():
     """function that create versions directory
@@ -18,5 +19,5 @@ def do_pack():
     try:
         local(f"tar -czf {archive_path} web_static")
         return archive_path
-    except:
+    except Exception:
         return None
