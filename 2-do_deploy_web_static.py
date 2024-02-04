@@ -22,13 +22,25 @@ def do_deploy(archive_path):
 
         run(f"sudo mkdir -p {target_dir}")
         run(f"sudo tar -xzf /tmp/{archive_filename} -C {target_dir}")
+<<<<<<< HEAD
         run(f"sudo rm -rf /tmp/{archive_filename}")
 
         run(f"sudo rm -rf /data/web_static/current")
         run(f"sudo ln -s {target_dir}/web_static/ /data/web_static/current")
+=======
+        run(f"sudo rm -f /tmp/{archive_path}")
+
+        run(f"sudo rm -rf /data/web_static/current")
+        run(f"sudo ln -s {target_dir}/web_static/ /data/web_static/current")
+        print("it's Done")
+>>>>>>> refs/remotes/origin/master
         return True
     except Exception:
         return False
 
 
+<<<<<<< HEAD
 archive_path = "./versions/web_static_20240201013448.tgz"
+=======
+archive_path = "./versions/web_static_20240201013449.tgz"
+>>>>>>> refs/remotes/origin/master
