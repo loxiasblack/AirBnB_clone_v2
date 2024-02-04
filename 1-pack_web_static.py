@@ -13,7 +13,7 @@ def do_pack():
         archive_name = f"web_static_{timestamp}.tgz"
         archive_path = f"versions/{archive_name}"
         try:
-            local(f"tar -cfz {archive_path} web_static")
+            local(f"tar -czf     {archive_path} web_static")
             return archive_path
-        except:
+        except Exception:
             return None
