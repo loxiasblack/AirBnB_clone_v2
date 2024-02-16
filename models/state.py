@@ -12,12 +12,11 @@ class State(BaseModel, Base):
     __tablename__ = "states"
     name = Column(String(128), nullable=False)
     cities = relationship("City", backref="state",
-                             cascade="all, delete-orphan")
-    
+                          cascade="all, delete-orphan")
+
     @property
     def cities(self):
         from models import storage
         city_instances = storage.all(City)
-        return [city for city in city_instances.values() 
+        return [city for city in city_instances.values()
                 if city.state_id == self.id]
-

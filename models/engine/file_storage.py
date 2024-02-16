@@ -18,7 +18,7 @@ class FileStorage:
                 if isinstance(obj, cls):
                     filtred_objects[key] = obj
             return filtred_objects
-    
+
     def new(self, obj):
         """Adds new object to storage dictionary"""
         self.all().update({obj.to_dict()['__class__'] + '.' + obj.id: obj})
@@ -52,17 +52,17 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as f:
                 temp = json.load(f)
                 for key, val in temp.items():
-                        self.all()[key] = classes[val['__class__']](**val)
+                    self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
-        
+
     def delete(self, obj=None):
         """delete object from my __objects """
-        if obj:                      
+        if obj:
             if (obj and f"{obj.__class__.__name__}.{obj.id}" in self.all()):
                 to_delete = f"{obj.__class__.__name__}.{obj.id}"
                 self.all().pop(to_delete)
-    
+
     def close(self):
         """deserializing the JSON file objects"""
         self.reload()
