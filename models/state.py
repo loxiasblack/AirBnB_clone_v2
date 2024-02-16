@@ -20,3 +20,4 @@ class State(BaseModel, Base):
         city_instances = storage.all(City)
         return [city for city in city_instances.values() 
                 if city.state_id == self.id]
+
