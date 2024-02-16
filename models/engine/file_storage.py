@@ -62,3 +62,7 @@ class FileStorage:
             if (obj and f"{obj.__class__.__name__}.{obj.id}" in self.all()):
                 to_delete = f"{obj.__class__.__name__}.{obj.id}"
                 self.all().pop(to_delete)
+    
+    def close(self):
+        """deserializing the JSON file objects"""
+        self.reload()
