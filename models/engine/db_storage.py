@@ -21,7 +21,7 @@ class DBStorage:
         """instantiation"""
         db_user = os.getenv("HBNB_MYSQL_USER")
         db_password = os.getenv("HBNB_MYSQL_PWD")
-        db_host = os.getenv("HBNB_MYSQL_HOST", default="localhost")
+        db_host = os.getenv("HBNB_MYSQL_HOST")
         db_name = os.getenv("HBNB_MYSQL_DB")
 
         self.__engine = create_engine("mysql+mysqldb://{}:{}@{}:3306/{}".
@@ -30,21 +30,25 @@ class DBStorage:
                                       pool_pre_ping=True)
 
         if os.getenv("HBNB_ENV") == 'test':
-            Base.metadata.drop_all(bind=self.__engine)
+            Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         """retrive classes"""
+        my_classes = (Amenity, City, Place, Review, State, User)
+        objects = dict()
+
         if cls is None:
-            classes = [User, State, City, Amenity, Place, Review]
+            for item in my_classes:
+                query = self.__session.query(item)
+                for obj in query.all():
+                    obj_key = '{}.{}'.format(obj.__class__.__name__, obj.id)
+                    objects[obj_key] = obj
         else:
-            classes = [cls]
-        dictionary = {}
-        for class_obj in classes:
-            query_result = self.__session.query(class_obj).all()
-            for obj in query_result:
-                key = "{}.{}".format(obj.__class__.__name__, query_result.id)
-                dictionary[key] = obj
-        return dictionary
+            query = self.__session.query(cls)
+            for obj in query.all():
+                obj_key = '{}.{}'.format(obj.__class__.__name__, obj.id)
+                objects[obj_key] = obj
+        return objects
 
     def new(self, obj):
         """add object to the current database"""
