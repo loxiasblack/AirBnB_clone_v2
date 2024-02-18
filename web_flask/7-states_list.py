@@ -18,8 +18,8 @@ def states_list():
 
 @app.teardown_appcontext
 def close(exception):
-    """close the storage"""
-    return storage.close()
+    """remove the current storage"""
+    storage.close()
 
 
 if __name__ == "__main__":
