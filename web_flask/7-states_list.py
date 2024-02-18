@@ -16,8 +16,8 @@ def states_list():
     return render_template("7-states_list.html", states=sorted_list)
 
 
-@app.teardown_appcontext(Exception)
-def close():
+@app.teardown_appcontext
+def close(exception):
     """close the storage"""
     return storage.close()
 
