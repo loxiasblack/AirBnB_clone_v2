@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#setup my web server to deploy web_static
+
 if command -v nginx > /dev/null; then
     echo "Nginx is already installed"
 else
